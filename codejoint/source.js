@@ -6,6 +6,7 @@
 
       const WIDTH = 160;
       const HEIGHT = 44;
+      console.log(WIDTH, HEIGHT);
       pretag.style = `background-color:#000; color:#ccc; font-size: 7pt; width: ${WIDTH}ch;`
       let a = 0, b = 0;
       let buff = new Array(WIDTH*HEIGHT);
@@ -22,12 +23,12 @@
           let yr = -x*sinB+cosB*(y*cosA+z*sinA);
           let zr = z*cosA-y*sinA+distFromCam;
           let ooz = 1/(zr);
-          const K = WIDTH*distFromCam/8;
+          const K = HEIGHT*distFromCam/2;
           let xp = Math.floor(WIDTH/2+2*K*ooz*xr);
           let yp = Math.floor(HEIGHT/2+K*ooz*yr);
           let idx = xp + yp*WIDTH;
           if (L > 0) {
-              if (idx >= 0 && idx < WIDTH*HEIGHT) {
+              if (xp >= 0 && xp < WIDTH-1 && yp >= 0 && yp < HEIGHT) {
                   if (ooz > zbuff[idx]) {
                       zbuff[idx] = ooz;
                       let lidx = Math.floor(L*5.5);
